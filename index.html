@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<!-- ↑ Šis saka pārlūkam: "Šis ir HTML5 dokuments" -->
+
+<html lang="lv">
+<!-- ↑ <html> - Visa lapas sākums. lang="lv" nozīmē latviešu valoda -->
+
+<head>
+<!-- ↑ <head> satur informāciju PAR lapu (lietotājs neredz) -->
+
+    <meta charset="UTF-8">
+    <!-- ↑ Atbalsta latviešu burtus (ā, č, ē, ģ...) -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ↑ Lai lapa labi izskatās uz mobilajiem telefoniem -->
+
+    <title>Portfolio</title>
+    <!-- ↑ Teksts, ko redz pārlūka tab augšā -->
+
+    <link rel="stylesheet" href="style.css">
+    <!-- ↑ SVARĪGI! Pievieno CSS failu ar stiliem -->
+    <!-- href="style.css" nozīmē: meklē style.css TAJĀ PAŠĀ mapē -->
+
+</head>
+<!-- ↑ Head beidzas -->
+
+<body>
+<!-- ↑ <body> satur visu, ko lietotājs REDZ lapā -->
+   
+    <!-- ========================================
+         HEADER - Augšējā navigācijas josla
+         ======================================== -->
+    <header>
+    <!-- ↑ Semantiskais tags lapas galvenei -->
+    <!-- Šeit būs logo un menu -->
+
+        <nav>
+        <!-- ↑ <nav> - navigācijas elements -->
+
+            <h1>Vārds Uzvārds</h1>
+            <!-- ↑ <h1> - Galvenais virsraksts (lielākais) -->
+            <!-- Šeit students raksta savu vārdu -->
+
+            <ul>
+            <!-- ↑ <ul> - Unordered List (saraksts ar punktiem) -->
+
+                <li><a href="index.html">Sākums</a></li>
+                <!-- ↑ <li> - List Item (saraksta elements) -->
+                <!-- <a href="..."> - saite uz citu lapu -->
+                <!-- href="index.html" - ved uz šo pašu lapu -->
+
+                <li><a href="about.html">Par mani</a></li>
+                <!-- ↑ Saite uz "Par mani" lapu (vēl nav izveidota) -->
+
+                <li><a href="contact.html">Kontakti</a></li>
+                <!-- ↑ Saite uz "Kontakti" lapu (vēl nav izveidota) -->
+
+            </ul>
+            <!-- ↑ Saraksta beigas -->
+
+        </nav>
+        <!-- ↑ Navigācijas beigas -->
+
+    </header>
+    <!-- ↑ Header beidzas -->
+
+    <!-- ========================================
+         MAIN - Galvenais saturs
+         ======================================== -->
+    <main>
+    <!-- ↑ <main> - galvenais lapas saturs -->
+
+        <!-- HERO SEKCIJA - Liela intro daļa -->
+        <section class="hero">
+        <!-- ↑ <section> - semantisks satura bloks -->
+        <!-- class="hero" - CSS var mērķēt šo konkrēto sekciju -->
+
+            <h2>Māksliniece<br>un programmētāja</h2>
+            <!-- ↑ <h2> - Otrā līmeņa virsraksts (mazāks par h1) -->
+            <!-- <br> - line break, jauna rinda -->
+
+            <p>Radu interaktīvas pieredzes, kurās māksla satiekas ar tehnoloģijām.</p>
+            <!-- ↑ <p> - Paragraph (rindkopa/paragrāfs) -->
+
+        </section>
+        <!-- ↑ Hero sekcijas beigas -->
+
+        <!-- PORTFOLIO SEKCIJA - Darbu galerija -->
+        <section class="portfolio">
+        <!-- ↑ Jauna sekcija ar class="portfolio" -->
+
+            <h2>Izvēlētie darbi</h2>
+            <!-- ↑ Sekcijas virsraksts -->
+
+            <div class="gallery">
+            <!-- ↑ <div> - Container (kastīte grupēšanai) -->
+            <!-- class="gallery" - CSS izmantos, lai izveidotu grid layout -->
+
+                <!-- PROJEKTS 1 -->
+                <div class="project-card card1">
+                <!-- ↑ Pirmā projekta kartīte -->
+                <!-- 2 klases: "project-card" (vispārīgi stili) + "card1" (specifiskā krāsa) -->
+
+                    <div class="img-placeholder"></div>
+                    <!-- ↑ Tukša kastīte attēlam -->
+                    <!-- CSS piešķirs pelēko fonu -->
+                    <!-- Vēlāk var pievienot: <img src="images/project1.jpg"> -->
+
+                    <h3>Projekta nosaukums</h3>
+                    <!-- ↑ <h3> - Trešā līmeņa virsraksts (vēl mazāks) -->
+                    <!-- Students šeit raksta sava darba nosaukumu -->
+
+                    <p>Interaktīva instalācija, 2025</p>
+                    <!-- ↑ Īss darba apraksts -->
+
+                </div>
+                <!-- ↑ Projekta 1 beigas -->
+
+                <!-- PROJEKTS 2 -->
+                <div class="project-card card2">
+                <!-- ↑ Otrā projekta kartīte -->
+                <!-- card2 = cita fona krāsa CSS -->
+
+                    <div class="img-placeholder"></div>
+                    <!-- ↑ Vieta otrajam attēlam -->
+
+                    <h3>Projekta nosaukums</h3>
+                    <!-- ↑ Otra projekta nosaukums -->
+
+                    <p>Ģeneratīvā māksla, 2025</p>
+                    <!-- ↑ Otra projekta apraksts -->
+
+                </div>
+                <!-- ↑ Projekta 2 beigas -->
+
+                <!-- PROJEKTS 3 -->
+                <div class="project-card card3">
+                <!-- ↑ Trešā projekta kartīte -->
+
+                    <div class="img-placeholder"></div>
+                    <!-- ↑ Vieta trešajam attēlam -->
+
+                    <h3>Projekta nosaukums</h3>
+                    <!-- ↑ Trešā projekta nosaukums -->
+
+                    <p>Web eksperiments, 2025</p>
+                    <!-- ↑ Trešā projekta apraksts -->
+
+                </div>
+                <!-- ↑ Projekta 3 beigas -->
+
+            </div>
+            <!-- ↑ Gallery beidzas -->
+
+        </section>
+        <!-- ↑ Portfolio sekcijas beigas -->
+
+    </main>
+    <!-- ↑ Main satura beigas -->
+
+    <!-- ========================================
+         FOOTER - Apakšējā daļa ar info
+         ======================================== -->
+    <footer>
+    <!-- ↑ <footer> - semantisks tags lapas kājenei -->
+
+        <div class="footer-content">
+        <!-- ↑ Container kas centēs saturu (CSS) -->
+
+            <p>© 2026 Vārds Uzvārds</p>
+            <!-- ↑ Copyright simbols © un vārds -->
+
+            <div class="social-links">
+            <!-- ↑ Container sociālajām saitēm -->
+
+                <a href="#">Instagram</a>
+                <!-- ↑ Saite uz Instagram -->
+                <!-- href="#" - pagaidu, vēlāk aizstāj ar īsto URL -->
+
+                <a href="#">Youtube</a>
+                <!-- ↑ Saite uz Youtube -->
+
+                <a href="#">Facebook</a>
+                <!-- ↑ Saite uz Facebook -->
+
+            </div>
+            <!-- ↑ Social links beidzas -->
+
+        </div>
+        <!-- ↑ Footer content beidzas -->
+
+    </footer>
+    <!-- ↑ Footer beidzas -->
+
+</body>
+<!-- ↑ Body beidzas -->
+
+</html>
+<!-- ↑ Visa HTML dokumenta beigas -->
+
+
+<!--
+==============================================
+KOPSAVILKUMS - LAPAS STRUKTŪRA:
+==============================================
+
+1. HEADER (augšā)
+   └── Logo (Vārds Uzvārds) + Menu saites
+
+2. MAIN (vidus)
+   ├── HERO sekcija
+   │   └── Liels virsraksts + apraksts
+   └── PORTFOLIO sekcija
+       └── 3 projektu kartītes
+           ├── Attēla vieta
+           ├── Nosaukums
+           └── Apraksts
+
+3. FOOTER (apakšā)
+   └── Copyright + Sociālās saites
+
+==============================================
+KO MAINĪT:
+==============================================
+
+✏️  Rinda 14: Tavs vārds
+✏️  Rinda 27: Hero virsraksts
+✏️  Rinda 28: Hero apraksts
+✏️  Rinda 40-42: Projekts 1 info
+✏️  Rinda 49-51: Projekts 2 info
+✏️  Rinda 58-60: Projekts 3 info
+✏️  Rinda 71: Copyright vārds
+✏️  Rinda 75-79: Sociālo saišu URL
+==============================================
+-->
+
+
