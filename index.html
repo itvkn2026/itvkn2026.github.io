@@ -100,17 +100,18 @@
                 <!-- ↑ Pirmā projekta kartīte -->
                 <!-- 2 klases: "project-card" (vispārīgi stili) + "card1" (specifiskā krāsa) -->
 
-                    <div class="img-placeholder"></div>
-                    <!-- ↑ Tukša kastīte attēlam -->
-                    <!-- CSS piešķirs pelēko fonu -->
-                    <!-- Vēlāk var pievienot: <img src="images/project1.jpg"> -->
+                    <img src="Art/Artwork1/Artwork1.jpg" alt="Project1">
+                    <!-- ↑ <img> tags attēlam -->
+                    <!-- src="Art/Artwork1/Artwork1.jpg" - ceļš uz attēlu -->
+                    <!-- alt="..." - alternatīvs teksts (ja attēls neielādējas) -->
 
-                    <h3>Projekta nosaukums</h3>
-                    <!-- ↑ <h3> - Trešā līmeņa virsraksts (vēl mazāks) -->
-                    <!-- Students šeit raksta sava darba nosaukumu -->
+                    <h3>Projekts 1</h3>
+                    <!-- ↑ <h3> - Trešā līmeņa virsraksts -->
+                    <!-- ✏️ ŠEI mainīt darba nosaukumu -->
 
-                    <p>Interaktīva instalācija, 2025</p>
+                    <p>Fotogrāfija, 2025</p>
                     <!-- ↑ Īss darba apraksts -->
+                    <!-- ✏️ ŠEI mainīt darba aprakstu un gadu -->
 
                 </div>
                 <!-- ↑ Projekta 1 beigas -->
@@ -120,14 +121,17 @@
                 <!-- ↑ Otrā projekta kartīte -->
                 <!-- card2 = cita fona krāsa CSS -->
 
-                    <div class="img-placeholder"></div>
-                    <!-- ↑ Vieta otrajam attēlam -->
+                    <img src="Art/Artwork2/Artwork2.jpg" alt="Project2">
+                    <!-- ↑ Attēls otrajam projektam -->
+                    <!-- src="Art/Artwork2/Artwork2.jpg" - ceļš uz attēlu -->
 
-                    <h3>Projekta nosaukums</h3>
+                    <h3>Projekts 2</h3>
                     <!-- ↑ Otra projekta nosaukums -->
+                    <!-- ✏️ ŠEI mainīt darba nosaukumu -->
 
-                    <p>Ģeneratīvā māksla, 2025</p>
+                    <p>Fotogrāfija, 2024</p>
                     <!-- ↑ Otra projekta apraksts -->
+                    <!-- ✏️ ŠEI mainīt darba aprakstu un gadu -->
 
                 </div>
                 <!-- ↑ Projekta 2 beigas -->
@@ -136,14 +140,17 @@
                 <div class="project-card card3">
                 <!-- ↑ Trešā projekta kartīte -->
 
-                    <div class="img-placeholder"></div>
-                    <!-- ↑ Vieta trešajam attēlam -->
+                    <img src="Art/Artwork3/Artwork3.jpg" alt="Project3">
+                    <!-- ↑ Attēls trešajam projektam -->
+                    <!-- src="Art/Artwork3/Artwork3.jpg" - ceļš uz attēlu -->
 
-                    <h3>Projekta nosaukums</h3>
+                    <h3>Projekts 3</h3>
                     <!-- ↑ Trešā projekta nosaukums -->
+                    <!-- ✏️ ŠEI mainīt darba nosaukumu -->
 
-                    <p>Web eksperiments, 2025</p>
+                    <p>Fotogrāfija, 2023</p>
                     <!-- ↑ Trešā projekta apraksts -->
+                    <!-- ✏️ ŠEI mainīt darba aprakstu un gadu -->
 
                 </div>
                 <!-- ↑ Projekta 3 beigas -->
@@ -211,7 +218,7 @@ KOPSAVILKUMS - LAPAS STRUKTŪRA:
    │   └── Liels virsraksts + apraksts
    └── PORTFOLIO sekcija
        └── 3 projektu kartītes
-           ├── Attēla vieta
+           ├── Attēls (no Art mapes)
            ├── Nosaukums
            └── Apraksts
 
@@ -225,11 +232,43 @@ KO MAINĪT:
 ✏️  Rinda 14: Tavs vārds
 ✏️  Rinda 27: Hero virsraksts
 ✏️  Rinda 28: Hero apraksts
-✏️  Rinda 40-42: Projekts 1 info
-✏️  Rinda 49-51: Projekts 2 info
-✏️  Rinda 58-60: Projekts 3 info
-✏️  Rinda 71: Copyright vārds
-✏️  Rinda 75-79: Sociālo saišu URL
+
+PROJEKTS 1 (rindas ~40-50):
+✏️  src="Art/Artwork1/Artwork1.jpg" - Attēla ceļš
+✏️  alt="..." - Attēla apraksts
+✏️  <h3> - Darba nosaukums
+✏️  <p> - Darba apraksts un gads
+
+PROJEKTS 2 (rindas ~52-62):
+✏️  src="Art/Artwork2/Artwork2.jpg" - Attēla ceļš
+✏️  alt="..." - Attēla apraksts
+✏️  <h3> - Darba nosaukums
+✏️  <p> - Darba apraksts un gads
+
+PROJEKTS 3 (rindas ~64-74):
+✏️  src="Art/Artwork3/Artwork3.jpg" - Attēla ceļš
+✏️  alt="..." - Attēla apraksts
+✏️  <h3> - Darba nosaukums
+✏️  <p> - Darba apraksts un gads
+
+✏️  Rinda ~85: Copyright vārds
+✏️  Rinda ~90-94: Sociālo saišu URL
+
+==============================================
+MAPES STRUKTŪRA:
+==============================================
+
+📁 Tavs portfolio
+├── 📄 index.html
+├── 📄 style.css
+└── 📁 Art
+    ├── 📁 Artwork1
+    │   └── 🖼️ Artwork1.jpg
+    ├── 📁 Artwork2
+    │   └── 🖼️ Artwork2.jpg
+    └── 📁 Artwork3
+        └── 🖼️ Artwork3.jpg
+
 ==============================================
 -->
 
