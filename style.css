@@ -26,8 +26,8 @@
     --color-border: #e5e5e5;   /* Robežas */
     
     /* HEADER HOVER KRĀSAS - Mainīt šeit! */
-    --color-logo-hover: rgb(153, 0, 255);      /* Paula Dejus hover */
-    --color-menu-hover: rgb(153, 0, 255);      /* Par mani hover */
+    --color-logo-hover: rgb(54, 151, 35);      /* Paula Dejus hover */
+    --color-menu-hover: rgb(54, 151, 35);      /* Par mani hover */
     
     /* ATSTARPES */
     --space-xs: 0.5rem;   /* 8px */
