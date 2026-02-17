@@ -448,7 +448,7 @@ footer p {
    RESPONSIVE - Mobilajiem telefoniem
    ============================================ */
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     /* ↑ Media query = CSS kas darbojas TIK JA... */
     /* max-width: 768px = ekrāns 768px vai mazāks */
     /* Tipiskais tablet/phone breakpoint */
@@ -456,9 +456,9 @@ footer p {
     header, main, footer {
         /* ↑ Visiem trim elementiem */
        
-        padding-left: 2rem;
-        padding-right: 2rem;
-        /* ↑ Mazāks padding sānos (4rem → 2rem) */
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        /* ↑ Mazāks padding sānos (4rem → 1.5rem) */
         /* Vairāk vietas šaurā ekrānā */
     }
 
@@ -479,29 +479,34 @@ footer p {
     nav ul {
         /* ↑ Menu saraksts mobilajā */
        
-        gap: 2rem;
-        /* ↑ Mazāka atstarpe (3rem → 2rem) */
+        gap: 1.5rem;
+        /* ↑ Mazāka atstarpe (3rem → 1.5rem) */
+        
+        flex-wrap: wrap;
+        /* ↑ Ja neietilpst, pārnes uz jaunu rindu */
     }
 
     .hero {
         /* ↑ Hero sekcija mobilajā */
        
-        padding: 4rem 0 3rem;
-        /* ↑ Mazāks padding (8rem → 4rem, 6rem → 3rem) */
+        padding: 3rem 0 2rem;
+        /* ↑ Mazāks padding (8rem → 3rem, 6rem → 2rem) */
     }
 
     .hero h2 {
         /* ↑ Hero virsraksts mobilajā */
        
-        font-size: 2.5rem;
-        /* ↑ Mazāks (4rem → 2.5rem = 64px → 40px) */
+        font-size: 2rem;
+        /* ↑ Mazāks (4rem → 2rem = 64px → 32px) */
+        
+        line-height: 1.2;
     }
 
     .hero p {
         /* ↑ Hero teksts mobilajā */
        
-        font-size: 1.1rem;
-        /* ↑ Mazāks (1.25rem → 1.1rem) */
+        font-size: 1rem;
+        /* ↑ Mazāks (1.25rem → 1rem) */
     }
 
     .gallery {
@@ -510,6 +515,19 @@ footer p {
         grid-template-columns: 1fr;
         /* ↑ TIK 1 kolonna (nevis 2-3) */
         /* Visi projekti pa vertikāli */
+        
+        gap: 2rem;
+        /* ↑ Mazāka atstarpe starp projektiem */
+    }
+    
+  .project-card img,
+    .video-container {
+        /* ↑ Bildes UN video mobilajā */
+        
+        aspect-ratio: 16/9;
+        /* ↑ Platāks formāts mobilajiem */
+        width: 100%;
+        /* ↑ Pilns platums */
     }
 
     .footer-content {
@@ -525,7 +543,30 @@ footer p {
         align-items: flex-start;
         /* ↑ Izlīdzina pa kreisi */
     }
-
+    
+    /* Pop-up mobilajiem */
+    .popup-content {
+        margin: 1rem;
+        padding: 1.5rem;
+        max-height: 95vh;
+    }
+    
+    .popup-text {
+        padding: 0;
+    }
+    
+    .popup-content img {
+        max-height: 300px;
+    }
+    
+    /* Accordion mobilajiem */
+    .accordion-content {
+        padding: 0 1rem;
+    }
+    
+    .accordion-card.active .accordion-content {
+        padding: 1rem;
+    }
 }
 
 /* ============================================
@@ -924,6 +965,42 @@ footer p {
 }
 
 /* ============================================
+   VIDEO EMBED (PROJEKTS 4)
+   ============================================ */
+
+/* ============================================
+   VIDEO EMBED (PROJEKTS 4)
+   ============================================ */
+
+.video-container {
+    position: relative;
+    width: 100% !important;
+    /* ↑ !important pārliecinās ka vienmēr pilns platums */
+    
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    background: #000;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    /* ↑ !important pārliecinās ka aizpilda visu */
+    
+    border: none;
+}
+
+.project-card .video-container {
+    /* Specifisks stils kartītē */
+    width: 100%;
+    display: block;
+}
+
+=========================
    KOPSAVILKUMS - KO MAINĪT:
    ============================================
    
