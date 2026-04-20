@@ -1,301 +1,352 @@
 <!DOCTYPE html>
-<!-- ↑ Šis saka pārlūkam: "Šis ir HTML5 dokuments" -->
-
-<html lang="lv">
-<!-- ↑ <html> - Visa lapas sākums. lang="lv" nozīmē latviešu valoda -->
-
+<html lang="en">
 <head>
-<!-- ↑ <head> satur informāciju PAR lapu (lietotājs neredz) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studentu Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
-    <meta charset="UTF-8">
-    <!-- ↑ Atbalsta latviešu burtus (ā, č, ē, ģ...) -->
+  <script>
+    const emoji = '🎨';
+    const canvas = document.createElement('canvas');
+    canvas.width = 64; canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    ctx.font = '52px serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(emoji, 32, 34);
+    const link = document.createElement('link');
+    link.rel = 'icon'; link.href = canvas.toDataURL();
+    document.head.appendChild(link);
+  </script>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ↑ Lai lapa labi izskatās uz mobilajiem telefoniem -->
+  <style>
+    :root {
+      --bg-page:        #ffffff;
+      --text-btn:       #000000;
+      --text-btn-hover: #2124d6;
+    }
 
-    <title>Portfolio</title>
-    <!-- ↑ Teksts, ko redz pārlūka tab augšā -->
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <link rel="icon" type="image/png" href="favicon.png">
+    body {
+      font-family: "VT323", monospace;
+      background: var(--bg-page);
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
 
-    <!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@300;400;500;700&display=swap" rel="stylesheet">
+    #grid-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
 
-<link rel="stylesheet" href="style.css">
-    <!-- ↑ SVARĪGI! Pievieno CSS failu ar stiliem -->
-    <!-- href="style.css" nozīmē: meklē style.css TAJĀ PAŠĀ mapē -->
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      width: 100%;
+      max-width: 1400px;
+    }
 
+    .grid-cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 160px;
+      padding: 2rem 2.5rem;
+      overflow: hidden;
+    }
+
+    .float-name {
+      position: fixed;
+      font-family: "VT323", monospace;
+      font-size: 45px;
+      font-weight: 500;
+      white-space: nowrap;
+      text-decoration: none;
+      color: var(--text-btn);
+      cursor: pointer;
+      user-select: none;
+      transform: translate(-50%, -50%);
+      transition: color 0.15s;
+      z-index: 10;
+    }
+
+    .float-name:hover {
+      color: var(--text-btn-hover);
+    }
+
+    @media (max-width: 1100px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .grid-cell { min-height: 120px; }
+    }
+
+    @media (max-width: 500px) {
+      .grid { grid-template-columns: 1fr; }
+      .grid-cell { min-height: 80px; padding: 1.2rem 1rem; }
+    }
+  </style>
 </head>
-<!-- ↑ Head beidzas -->
-
 <body>
-<!-- ↑ <body> satur visu, ko lietotājs REDZ lapā -->
-   
-    <!-- ========================================
-         HEADER - Augšējā navigācijas josla
-         ======================================== -->
-    <header>
-    <!-- ↑ Semantiskais tags lapas galvenei -->
-    <!-- Šeit būs logo un menu -->
 
-        <nav>
-        <!-- ↑ <nav> - navigācijas elements -->
+  <div id="grid-container">
+    <div class="grid" id="grid">
+      <div class="grid-cell"></div>
+      <div class="grid-cell"></div>
+      <div class="grid-cell"></div>
+      <div class="grid-cell"></div>
+      <div class="grid-cell"></div>
+      <div class="grid-cell"></div>
+      <div class="grid-cell"></div>
+      <div class="grid-cell"></div>
+      <div class="grid-cell"></div>
+    </div>
+  </div>
 
-            <h1><a href="https://itvkn2026.github.io/" class="logo-link">Paula Dejus</a></h1>
-            <!-- ↑ <h1> - Galvenais virsraksts (lielākais) -->
-            <!-- Šeit students raksta savu vārdu -->
+  <script>
+    // ===================== SETTINGS =====================
+    const IDLE_TIMEOUT   = 10000;  // ms before screensaver starts
 
-            <ul>
-            <!-- ↑ <ul> - Unordered List (saraksts ar punktiem) -->
+    const USE_WOBBLE     = true;   // Option A: sine-wave drift, feels organic
+    const USE_VARIED_SPEED = true; // Option B: each name moves at a different speed
 
+    const SNAP_EASE      = 0.08;   // how fast names ease back to grid (0.01 = very slow, 0.2 = fast)
+    // ====================================================
 
-                <li><a href="about.html">Par mani</a></li>
-                <!-- ↑ Saite uz "Par mani" lapu (vēl nav izveidota) -->
+    const students = [
+      { name: "Estere Artmane",        url: "https://artmane.github.io/" },
+      { name: "Katrīna Līva Dalbiņa",  url: "https://example.com/student2" },
+      { name: "Kristers Dzenis",        url: "https://kristersdzenis.net/" },
+      { name: "Anna Fogele",            url: "https://annafogele.github.io/" },
+      { name: "Malle Kikuste",          url: "https://mallekikuste.github.io/" },
+      { name: "Odrija Marta Klēbaha",  url: "https://example.com/student6" },
+      { name: "Dana Lozova",            url: "https://danalozova.github.io/" },
+      { name: "Ksenija Matvejeva",      url: "https://example.com/student8" },
+      { name: "Patrīcija Ņegeļeva",    url: "https://example.com/student9" },
+    ];
 
+    const cells = document.querySelectorAll('.grid-cell');
+    let idleTimer  = null;
+    let animFrame  = null;
+    let snapFrame  = null;
+    let isScreensaver = false;
+    let floaters   = [];
+    let tick       = 0;
 
-            </ul>
-            <!-- ↑ Saraksta beigas -->
+    function getResponsiveFontSize() {
+      const w = window.innerWidth;
+      if (w <= 500) return '22px';
+      if (w <= 1100) return '30px';
+      return '45px';
+    }
 
-        </nav>
-        <!-- ↑ Navigācijas beigas -->
+    function updateFontSizes() {
+      const size = getResponsiveFontSize();
+      floaters.forEach(f => { f.el.style.fontSize = size; });
+    }
 
-    </header>
-    <!-- ↑ Header beidzas -->
+    function getCellCenters() {
+      return Array.from(cells).map(cell => {
+        const r = cell.getBoundingClientRect();
+        return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+      });
+    }
 
-    <!-- ========================================
-         MAIN - Galvenais saturs
-         ======================================== -->
-    <main>
-    <!-- ↑ <main> - galvenais lapas saturs -->
+    function buildFloaters() {
+      const centers = getCellCenters();
+      floaters = students.map((s, i) => {
+        const el = document.createElement('a');
+        el.textContent = s.name;
+        el.href = s.url;
+        el.target = '_blank';
+        el.rel = 'noopener';
+        el.className = 'float-name';
 
-        <!-- HERO SEKCIJA - Liela intro daļa -->
-        <section class="hero">
-        <!-- ↑ <section> - semantisks satura bloks -->
-        <!-- class="hero" - CSS var mērķēt šo konkrēto sekciju -->
+        const cx = centers[i].x;
+        const cy = centers[i].y;
+        el.style.left = cx + 'px';
+        el.style.top  = cy + 'px';
+        document.body.appendChild(el);
 
-            <h2>Māksliniece<br>un programmētāja</h2>
-            <!-- ↑ <h2> - Otrā līmeņa virsraksts (mazāks par h1) -->
-            <!-- <br> - line break, jauna rinda -->
+        // Speed: varied or uniform
+        const baseSpeed = USE_VARIED_SPEED
+          ? 0.3 + Math.random() * 1.2   // wide range: some slow, some fast
+          : 0.7;                          // all the same
 
-            <p>Radu interaktīvas pieredzes, kurās māksla satiekas ar tehnoloģijām.</p>
-            <!-- ↑ <p> - Paragraph (rindkopa/paragrāfs) -->
+        const angle = Math.random() * Math.PI * 2;
 
-        </section>
-        <!-- ↑ Hero sekcijas beigas -->
+        return {
+          el,
+          x: cx, y: cy,
+          homeX: cx, homeY: cy,
+          vx: Math.cos(angle) * baseSpeed,
+          vy: Math.sin(angle) * baseSpeed,
+          baseSpeed,
+          // wobble params (Option A)
+          wobbleOffset: Math.random() * Math.PI * 2,
+          wobbleSpeed:  0.01 + Math.random() * 0.01,
+          wobbleAmp:    18 + Math.random() * 18,
+          hue:      (i / students.length) * 360,
+          hueSpeed: 0.3 + Math.random() * 0.4,
+        };
+      });
+    }
 
-        <!-- PORTFOLIO SEKCIJA - Darbu galerija -->
-        <section class="portfolio">
-        <!-- ↑ Jauna sekcija ar class="portfolio" -->
+    function resolveCollisions() {
+      for (let i = 0; i < floaters.length; i++) {
+        for (let j = i + 1; j < floaters.length; j++) {
+          const a = floaters[i];
+          const b = floaters[j];
 
-          <!-- <h2>Izvēlētie darbi</h2> -->
-            <!-- ↑ Sekcijas virsraksts -->
+          const aw = (a.el.offsetWidth  || 200) / 2;
+          const ah = (a.el.offsetHeight || 30)  / 2;
+          const bw = (b.el.offsetWidth  || 200) / 2;
+          const bh = (b.el.offsetHeight || 30)  / 2;
 
-            <div class="gallery">
-            <!-- ↑ <div> - Container (kastīte grupēšanai) -->
-            <!-- class="gallery" - CSS izmantos, lai izveidotu grid layout -->
+          const overlapX = (aw + bw) - Math.abs(b.x - a.x);
+          const overlapY = (ah + bh) - Math.abs(b.y - a.y);
 
-                <!-- PROJEKTS 1 - ACCORDION -->
-                <div class="project-card card1 accordion-card">
-                
-                    <img src="Art/Artwork1/Artwork1.jpg" alt="Projekta nosaukums" onclick="toggleAccordion(this)">
-                    
-                    <h3>Projekta nosaukums</h3>
-                    <p>Īss apraksts, 2025</p>
-                    
-                    <!-- Accordion saturs (sākumā paslēpts) -->
-                    <div class="accordion-content">
-                        <h4>Detalizēts apraksts:</h4>
-                        <p>Šeit raksti garu aprakstu par darbu. Vairāki paragrāfi. Tehnoloģijas, process, koncepcija.</p>
-                        <p>Vēl viens paragrāfs ar vairāk informācijas...</p>
-                        <p><strong>Izmantotās tehnoloģijas:</strong> Unity, Blender, C#</p>
-                    </div>
-                    
-                </div>
-                <!-- ↑ Projekta 1 beigas -->
+          if (overlapX > 0 && overlapY > 0) {
+            // resolve along the axis of least overlap
+            if (overlapX < overlapY) {
+              const sign = b.x > a.x ? 1 : -1;
+              a.x -= sign * overlapX / 2;
+              b.x += sign * overlapX / 2;
+              const temp = a.vx;
+              a.vx = b.vx;
+              b.vx = temp;
+            } else {
+              const sign = b.y > a.y ? 1 : -1;
+              a.y -= sign * overlapY / 2;
+              b.y += sign * overlapY / 2;
+              const temp = a.vy;
+              a.vy = b.vy;
+              b.vy = temp;
+            }
+          }
+        }
+      }
+    }
 
-               <!-- PROJEKTS 2 - POP-UP -->
-                <div class="project-card card2">
-                
-                    <img src="Art/Artwork2/Artwork2.jpg" alt="Projekta nosaukums" onclick="openPopup('popup2')">
-                    
-                    <h3>Projekta nosaukums</h3>
-                    <p>Ģeneratīvā māksla, 2025</p>
-                    
-                </div>
-                <!-- ↑ Projekta 2 beigas -->
+    function animateFloaters() {
+      tick++;
+      floaters.forEach(f => {
+        f.hue = (f.hue + f.hueSpeed) % 360;
 
-                <!-- PROJEKTS 3 - JAUNA LAPA -->
-                <a href="artwork3.html" class="project-link">
-                    <div class="project-card card3">
-                    
-                        <img src="Art/Artwork3/Artwork3.jpg" alt="Projekta nosaukums">
-                        
-                        <h3>Projekta nosaukums</h3>
-                        <p>Web eksperiments, 2025</p>
-                        
-                    </div>
-                </a>
-                <!-- ↑ Projekta 3 beigas -->
+        let moveX = f.vx;
+        let moveY = f.vy;
 
-                <!-- PROJEKTS 4 - YOUTUBE VIDEO -->
-                <div class="project-card card4">
-                
-                    <div class="video-container">
-                        <iframe 
-                            src="https://www.youtube.com/embed/SYyvx6GE2UI?si=XGrNPi6-vEyTYaQ4" 
-                            title="YouTube video player" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    
-                    <h3>Video projekta nosaukums</h3>
-                    <p>Animācija/Video darbs, 2025</p>
-                    
-                </div>
-                <!-- ↑ Projekta 4 beigas -->
+        // Option A: add perpendicular sine wobble
+        if (USE_WOBBLE) {
+          const angle  = Math.atan2(f.vy, f.vx);
+          const perp   = angle + Math.PI / 2;
+          const wobble = Math.sin(tick * f.wobbleSpeed + f.wobbleOffset) * f.wobbleAmp * 0.02;
+          moveX += Math.cos(perp) * wobble;
+          moveY += Math.sin(perp) * wobble;
+        }
 
-            </div>
-            <!-- ↑ Gallery beidzas -->
+        f.x += moveX;
+        f.y += moveY;
 
-            </div>
-            <!-- ↑ Gallery beidzas -->
+        const hw = (f.el.offsetWidth  || 200) / 2;
+        const hh = (f.el.offsetHeight || 30)  / 2;
 
-            <!-- POP-UP LOGS PROJEKTAM 2 -->
-            <div id="popup2" class="popup">
-                <div class="popup-content">
-                    <span class="close" onclick="closePopup('popup2')">&times;</span>
-                    
-                    <img src="Art/Artwork2/Artwork2.jpg" alt="Projekta nosaukums">
-                    
-                    <div class="popup-text">
-                        <h2>Projekta nosaukums</h2>
-                        <p><strong>Par darbu:</strong></p>
-                        <p>Detalizēts apraksts par darbu. Tehnoloģijas, koncepcija, process. Vairāki paragrāfi ar informāciju.</p>
-                        <p>Vēl viens paragrāfs...</p>
-                        <p><strong>Izmantotās tehnoloģijas:</strong> p5.js, WebGL, JavaScript</p>
-                    </div>
-                </div>
-            </div>
+        if (f.x - hw < 0)                 { f.x = hw;                      f.vx *= -1; }
+        if (f.x + hw > window.innerWidth) { f.x = window.innerWidth - hw;  f.vx *= -1; }
+        if (f.y - hh < 0)                 { f.y = hh;                      f.vy *= -1; }
+        if (f.y + hh > window.innerHeight){ f.y = window.innerHeight - hh; f.vy *= -1; }
 
-        </section>
-        <!-- ↑ Portfolio sekcijas beigas -->
+        f.el.style.left  = f.x + 'px';
+        f.el.style.top   = f.y + 'px';
+        f.el.style.color = `hsl(${f.hue}, 90%, 50%)`;
+      });
 
-        </section>
-        <!-- ↑ Portfolio sekcijas beigas -->
+      resolveCollisions();
+      animFrame = requestAnimationFrame(animateFloaters);
+    }
 
-    </main>
-    <!-- ↑ Main satura beigas -->
+    function easeToGrid() {
+      const centers = getCellCenters();
+      let allHome = true;
 
-    <!-- ========================================
-         FOOTER - Apakšējā daļa ar info
-         ======================================== -->
-    <footer>
-    <!-- ↑ <footer> - semantisks tags lapas kājenei -->
+      floaters.forEach((f, i) => {
+        f.homeX = centers[i].x;
+        f.homeY = centers[i].y;
 
-        <div class="footer-content">
-        <!-- ↑ Container kas centēs saturu (CSS) -->
+        const dx = f.homeX - f.x;
+        const dy = f.homeY - f.y;
 
-            <p>© 2026 Vārds Uzvārds</p>
-            <!-- ↑ Copyright simbols © un vārds -->
+        f.x += dx * SNAP_EASE;
+        f.y += dy * SNAP_EASE;
 
-            <div class="social-links">
-            <!-- ↑ Container sociālajām saitēm -->
+        f.el.style.left  = f.x + 'px';
+        f.el.style.top   = f.y + 'px';
+        f.el.style.color = '';
 
-                <a href="#">Instagram</a>
-                <!-- ↑ Saite uz Instagram -->
-                <!-- href="#" - pagaidu, vēlāk aizstāj ar īsto URL -->
+        if (Math.abs(dx) > 0.5 || Math.abs(dy) > 0.5) {
+          allHome = false;
+        } else {
+          f.x = f.homeX;
+          f.y = f.homeY;
+          f.el.style.left = f.homeX + 'px';
+          f.el.style.top  = f.homeY + 'px';
+        }
+      });
 
-                <a href="#">Youtube</a>
-                <!-- ↑ Saite uz Youtube -->
+      if (!allHome) {
+        snapFrame = requestAnimationFrame(easeToGrid);
+      }
+    }
 
-                <a href="#">Facebook</a>
-                <!-- ↑ Saite uz Facebook -->
+    function enterScreensaver() {
+      if (isScreensaver) return;
+      isScreensaver = true;
+      cancelAnimationFrame(snapFrame);
+      animateFloaters();
+    }
 
-            </div>
-            <!-- ↑ Social links beidzas -->
+    function exitScreensaver() {
+      if (!isScreensaver) return;
+      isScreensaver = false;
+      cancelAnimationFrame(animFrame);
+      easeToGrid();
+    }
 
-        </div>
-        <!-- ↑ Footer content beidzas -->
+    function resetTimer() {
+      clearTimeout(idleTimer);
+      if (isScreensaver) exitScreensaver();
+      idleTimer = setTimeout(enterScreensaver, IDLE_TIMEOUT);
+    }
 
-    </footer>
-    <!-- ↑ Footer beidzas -->
-<script src="script.js"></script>
+    document.addEventListener('mousemove', resetTimer);
+    document.addEventListener('touchstart', resetTimer);
+    document.addEventListener('keydown', resetTimer);
+    window.addEventListener('resize', () => {
+      updateFontSizes();
+      if (!isScreensaver) {
+        const centers = getCellCenters();
+        floaters.forEach((f, i) => {
+          f.homeX = centers[i].x;
+          f.homeY = centers[i].y;
+          f.x = f.homeX;
+          f.y = f.homeY;
+          f.el.style.left = f.x + 'px';
+          f.el.style.top  = f.y + 'px';
+        });
+      }
+    });
+
+    buildFloaters();
+    updateFontSizes();
+    idleTimer = setTimeout(enterScreensaver, IDLE_TIMEOUT);
+  </script>
+
 </body>
-<!-- ↑ Body beidzas -->
-
 </html>
-<!-- ↑ Visa HTML dokumenta beigas -->
-
-
-<!--
-==============================================
-KOPSAVILKUMS - LAPAS STRUKTŪRA:
-==============================================
-
-1. HEADER (augšā)
-   └── Logo (Vārds Uzvārds) + Menu saites
-
-2. MAIN (vidus)
-   ├── HERO sekcija
-   │   └── Liels virsraksts + apraksts
-   └── PORTFOLIO sekcija
-       └── 3 projektu kartītes
-           ├── Attēls (no Art mapes)
-           ├── Nosaukums
-           └── Apraksts
-
-3. FOOTER (apakšā)
-   └── Copyright + Sociālās saites
-
-==============================================
-KO MAINĪT:
-==============================================
-
-✏️  Rinda 14: Tavs vārds
-✏️  Rinda 27: Hero virsraksts
-✏️  Rinda 28: Hero apraksts
-
-PROJEKTS 1 (rindas ~40-50):
-✏️  src="Art/Artwork1/Artwork1.jpg" - Attēla ceļš
-✏️  alt="..." - Attēla apraksts
-✏️  <h3> - Darba nosaukums
-✏️  <p> - Darba apraksts un gads
-
-PROJEKTS 2 (rindas ~52-62):
-✏️  src="Art/Artwork2/Artwork2.jpg" - Attēla ceļš
-✏️  alt="..." - Attēla apraksts
-✏️  <h3> - Darba nosaukums
-✏️  <p> - Darba apraksts un gads
-
-PROJEKTS 3 (rindas ~64-74):
-✏️  src="Art/Artwork3/Artwork3.jpg" - Attēla ceļš
-✏️  alt="..." - Attēla apraksts
-✏️  <h3> - Darba nosaukums
-✏️  <p> - Darba apraksts un gads
-
-✏️  Rinda ~85: Copyright vārds
-✏️  Rinda ~90-94: Sociālo saišu URL
-
-==============================================
-MAPES STRUKTŪRA:
-==============================================
-
-📁 Tavs portfolio
-├── 📄 index.html
-├── 📄 style.css
-└── 📁 Art
-    ├── 📁 Artwork1
-    │   └── 🖼️ Artwork1.jpg
-    ├── 📁 Artwork2
-    │   └── 🖼️ Artwork2.jpg
-    └── 📁 Artwork3
-        └── 🖼️ Artwork3.jpg
-
-==============================================
--->
-
-
