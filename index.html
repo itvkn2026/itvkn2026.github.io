@@ -6,7 +6,19 @@
   <title>Studentu Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
-  <link rel="icon" type="image/png" href="favicon.png">
+  <script>
+    const emoji = '🎨';
+    const canvas = document.createElement('canvas');
+    canvas.width = 64; canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    ctx.font = '52px serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(emoji, 32, 34);
+    const link = document.createElement('link');
+    link.rel = 'icon'; link.href = canvas.toDataURL();
+    document.head.appendChild(link);
+  </script>
 
   <style>
     :root {
@@ -77,8 +89,8 @@
     }
 
     @media (max-width: 500px) {
-      .grid { grid-template-columns: 1fr; }
-      .grid-cell { min-height: 80px; padding: 1.2rem 1rem; }
+      .grid { grid-template-columns: 1fr; gap: 0; }
+      .grid-cell { min-height: 0; height: calc(100vh / 9); padding: 0; }
     }
   </style>
 </head>
@@ -130,7 +142,7 @@
 
     function getResponsiveFontSize() {
       const w = window.innerWidth;
-      if (w <= 500) return '22px';
+      if (w <= 500) return '18px';
       if (w <= 1100) return '30px';
       return '45px';
     }
